@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informe de Consultoría: Egreso Temprano</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .slide.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .slide-content {
+            min-height: 500px;
+        }
+        .kpi-card {
+            background-color: #f8fafc;
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+        }
+        .kpi-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex flex-col items-center justify-center min-h-screen p-4">
+
+    <div class="w-full max-w-5xl bg-white rounded-xl shadow-2xl overflow-hidden">
+        <!-- Slides Container -->
+        <div id="slides-container" class="p-8 md:p-12">
+
+            <!-- Slide 1: Portada -->
+            <div class="slide active">
+                <div class="flex flex-col items-center justify-center text-center slide-content">
+                    <div class="flex items-center space-x-4 mb-6">
+                         <img src="https://placehold.co/100x100/3182CE/FFFFFF?text=ACC" alt="Logo AGILE CARE CONSULTING" class="rounded-full">
+                         <span class="text-2xl text-gray-300 font-light">+</span>
+                         <img src="data:image/png;base64,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" alt="Logo MINIMED" class="h-12 w-auto rounded-lg">
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800">Primer Informe de Consultoría</h1>
+                    <p class="text-xl md:text-2xl text-blue-600 font-semibold mt-2">Programa de Egreso Temprano</p>
+                    <div class="my-8 border-t border-gray-200 w-1/3"></div>
+                    <p class="text-lg font-medium text-gray-700">Un análisis de la data de pacientes actual para identificar oportunidades.</p>
+                    <p class="text-sm text-gray-500 mt-12">Presentado por <span class="font-bold">AGILE CARE CONSULTING</span> a <span class="font-bold">MINIMED</span> | 6 de Agosto, 2025</p>
+                </div>
+            </div>
+
+            <!-- Slide 2: Análisis General del Censo -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="text-2xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-6">Análisis General del Cohorte de Pacientes</h2>
+                    <p class="text-gray-600 mb-8">Un vistazo a las cifras clave del grupo de pacientes analizados al 6 de Agosto de 2025.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="kpi-card p-6 rounded-lg shadow-md">
+                            <div class="flex items-center justify-between">
+                                <h3 class="font-semibold text-lg text-gray-700">Pacientes en Análisis</h3>
+                                <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                            </div>
+                            <p class="text-5xl font-extrabold text-gray-800 mt-4">4</p>
+                            <p class="text-gray-500">1 Egresada, 3 Hospitalizadas</p>
+                        </div>
+                        <div class="kpi-card p-6 rounded-lg shadow-md">
+                            <h3 class="font-semibold text-lg text-gray-700">Distribución por Género</h3>
+                            <div class="flex items-end space-x-2 mt-4">
+                                <div class="w-full bg-pink-200 rounded-t-md" style="height: 100px;"></div>
+                            </div>
+                            <p class="text-center text-lg font-bold text-pink-600 mt-2">100% Mujeres</p>
+                        </div>
+                         <div class="kpi-card p-6 rounded-lg shadow-md">
+                            <h3 class="font-semibold text-lg text-gray-700">Censo Actual por Área</h3>
+                             <div class="space-y-2 mt-4">
+                                 <p class="font-semibold text-gray-800">Hospitalización: <span class="text-blue-600 text-2xl font-bold">1</span></p>
+                                 <p class="font-semibold text-gray-800">UCI: <span class="text-red-600 text-2xl font-bold">2</span></p>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Paciente 1 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="text-2xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-6">Análisis de Paciente: Valentina Hernández</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-4">Datos Clave</h3>
+                            <div class="space-y-3 text-gray-700">
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg><b>Edad:</b> 87 años</p>
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg><b>Ingreso:</b> 20 de Julio, 2025 (~17 días)</p>
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg><b>Diagnóstico Principal:</b> Neumonía, Insuficiencia Cardíaca Severa.</p>
+                            </div>
+                            <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg">
+                                <p class="font-bold text-yellow-800">Punto Clave para Egreso:</p>
+                                <p class="text-yellow-700">El reporte indica "Coordinar egreso con Dr. Wilmer Gonzalez para manejo domiciliario con Cuidados Paliativos".</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="font-semibold text-lg text-blue-800 mb-4">Recomendaciones de Egreso Temprano</h3>
+                            <ul class="list-disc list-inside space-y-2 text-blue-700">
+                                <li>[Iniciar contacto con equipo de cuidados paliativos y familia para planificar la transición.]</li>
+                                <li>[Definir el paquete de servicios domiciliarios requerido (enfermería, terapia, oxígeno).]</li>
+                                <li>[Establecer fecha objetivo para el egreso.]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4: Paciente 2 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="text-2xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-6">Análisis de Paciente: Jazmina Moreno</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-4">Datos Clave</h3>
+                            <div class="space-y-3 text-gray-700">
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg><b>Edad:</b> 54 años</p>
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg><b>Evento Reciente:</b> Cirugía (Artrotomía) el 5 de Agosto.</p>
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg><b>Diagnóstico Principal:</b> Anemia Falciforme, Bacteriemia.</p>
+                            </div>
+                            <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg">
+                                <p class="font-bold text-yellow-800">Punto Clave para Egreso:</p>
+                                <p class="text-yellow-700">Paciente no es candidata a egreso inmediato. Requiere completar tratamiento antibiótico IV y recuperación post-quirúrgica.</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="font-semibold text-lg text-blue-800 mb-4">Recomendaciones de Egreso Temprano</h3>
+                            <ul class="list-disc list-inside space-y-3 text-blue-700 text-sm">
+                                <li><b>Manejo Infeccioso:</b> Se evidencia un retraso en la búsqueda del foco infeccioso y en la toma de cultivos. Es clave dar seguimiento a los resultados y reconsultar con Infectología. La dosificación inicial de antibióticos fue subóptima, impactando la estancia.</li>
+                                <li><b>Diagnósticos Incidentales:</b> Aclarar hallazgos del CT (¿Osteomielitis vs. Metástasis?). Reconsultar con Gastroenterología para buscar alternativa a ColangioRMN por contraindicación de prótesis.</li>
+                                <li><b>Condición Actual:</b> Mantener hospitalización para tratamiento IV, recuperación ortopédica y garantizar el control del cuadro infeccioso.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5: Paciente 3 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="text-2xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-6">Análisis de Paciente: Beatriz Chang</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-4">Datos Clave</h3>
+                            <div class="space-y-3 text-gray-700">
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg><b>Edad:</b> 92 años</p>
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg><b>Ingreso:</b> 5 de Agosto, 2025 (muy reciente)</p>
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg><b>Diagnóstico Principal:</b> ECV Isquémico, ERC reagudizada.</p>
+                            </div>
+                            <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg">
+                                <p class="font-bold text-yellow-800">Punto Clave para Egreso:</p>
+                                <p class="text-yellow-700">Paciente en condición aguda, requiere nutrición por sonda y monitoreo constante. No es candidata a corto plazo.</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="font-semibold text-lg text-blue-800 mb-4">Recomendaciones de Egreso Temprano</h3>
+                            <ul class="list-disc list-inside space-y-2 text-blue-700">
+                                <li>[Monitorear evolución clínica y neurológica.]</li>
+                                <li>[A mediano plazo, evaluar necesidad de rehabilitación y soporte nutricional domiciliario.]</li>
+                                <li>[Iniciar educación a la familia sobre los cuidados post-ECV.]</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6: Paciente 4 -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="text-2xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-6">Análisis de Paciente: Oderay González Ruiz</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-semibold text-lg text-gray-800 mb-4">Datos Clave</h3>
+                            <div class="space-y-3 text-gray-700">
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg><b>Edad:</b> 73 años</p>
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-blue-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg><b>Ingreso:</b> 28 de Julio, 2025</p>
+                                <p class="flex items-center"><svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><b>Egresada:</b> 5 de Agosto, 2025</p>
+                            </div>
+                            <div class="mt-6 p-4 bg-yellow-50 border-l-4 border-yellow-400 rounded-r-lg">
+                                <p class="font-bold text-yellow-800">Punto Clave para Egreso:</p>
+                                <p class="text-yellow-700">Egreso oportuno tras completar tratamiento para gastroenteritis. Presenta una oportunidad de análisis para futuros casos.</p>
+                            </div>
+                        </div>
+                        <div class="bg-blue-50 p-6 rounded-lg">
+                            <h3 class="font-semibold text-lg text-blue-800 mb-4">Recomendaciones y Oportunidades de Mejora</h3>
+                            <ul class="list-disc list-inside space-y-3 text-blue-700 text-sm">
+                                <li><b>Oportunidad de Egreso Anticipado:</b> Se pudo haber considerado el alta el Lunes 4/8, al completar los antibióticos IV, reduciendo la estancia en 1 día.</li>
+                                <li><b>Candidata a Hospitalización en Casa:</b> Este caso representa un perfil ideal para un programa de "Hospital en Casa", ya que el requerimiento principal era la administración de fluidos y antibióticos IV.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 7: Puntos Clave para Revisión -->
+            <div class="slide">
+                <div class="slide-content">
+                    <h2 class="text-2xl font-bold text-blue-800 border-b-2 border-blue-200 pb-2 mb-6">Puntos Clave para Revisión</h2>
+                    <p class="text-gray-600 mb-8">Para avanzar en la siguiente fase del proyecto, necesitamos clarificar los siguientes puntos:</p>
+                    <div class="space-y-6">
+                        <div class="p-6 border border-gray-200 rounded-lg shadow-sm">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2">1. Acceso a Datos de Facturación</h3>
+                            <p class="text-gray-700">¿Cuál es el proceso para obtener la información de facturación de cada paciente? Esto es vital para medir el impacto financiero del programa de egreso temprano.</p>
+                        </div>
+                        <div class="p-6 border border-gray-200 rounded-lg shadow-sm">
+                            <h3 class="font-semibold text-lg text-gray-800 mb-2">2. Seguimiento de Pacientes Remitidos</h3>
+                            <p class="text-gray-700 mb-4">¿Se ha tenido alguna novedad o actualización del hospital sobre los siguientes pacientes?</p>
+                            <ul class="list-disc list-inside space-y-2 text-gray-600">
+                                <li><b>Beatriz Chang (ingreso 5 de agosto):</b> Reportada en UCI por ECV. ¿Sigue el mismo plan?</li>
+                                <li><b>José Chávez (ingreso 6 de agosto):</b> Reportado por crisis hipertensiva vía SEMM. ¿Cuál es su estado actual y plan de manejo?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Navigation -->
+        <div class="bg-gray-50 p-4 flex justify-between items-center border-t">
+            <button onclick="nextPrev(-1)" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-lg transition-colors">
+                Anterior
+            </button>
+            <div id="slide-counter" class="text-sm text-gray-600"></div>
+            <button onclick="nextPrev(1)" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors">
+                Siguiente
+            </button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.getElementsByClassName("slide");
+        const slideCounter = document.getElementById("slide-counter");
+
+        function showSlide(n) {
+            if (n >= slides.length) {
+                currentSlide = 0;
+            } else if (n < 0) {
+                currentSlide = slides.length - 1;
+            } else {
+                currentSlide = n;
+            }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove("active");
+            }
+
+            slides[currentSlide].classList.add("active");
+            slideCounter.textContent = `Diapositiva ${currentSlide + 1} de ${slides.length}`;
+        }
+
+        function nextPrev(n) {
+            showSlide(currentSlide + n);
+        }
+
+        showSlide(currentSlide);
+    </script>
+
+</body>
+</html>
